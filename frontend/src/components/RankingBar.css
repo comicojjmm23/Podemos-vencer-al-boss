@@ -1,0 +1,143 @@
+/* Panel principal del ranking */
+.ranking-bar {
+  text-align: center;
+  padding: 1.5rem; /* reducido */
+  background: radial-gradient(circle at top, #0f0f1e 0%, #050510 100%);
+  border-radius: 16px; /* más compacto */
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.7), inset 0 0 10px rgba(0, 247, 255, 0.3);
+  position: relative;
+  overflow-x: auto;
+  overflow-y: visible;
+  max-height: none;
+}
+
+/* Animación de borde neon pulsante */
+.ranking-bar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  padding: 2px;
+  background: linear-gradient(90deg, #00f7ff, #ff00ff, #00ff88, #ffaa00, #ff0000);
+  background-size: 600% 600%;
+  animation: neonBorder 8s linear infinite;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: 1;
+}
+
+@keyframes neonBorder {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Fondo con partículas galácticas */
+.ranking-bar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='3' height='3' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='1.5' cy='1.5' r='1' fill='%2300f7ff'/%3E%3C/svg%3E") repeat;
+  opacity: 0.05;
+  animation: starfield 40s linear infinite;
+  z-index: 0;
+}
+
+@keyframes starfield {
+  from { background-position: 0 0; }
+  to { background-position: 1500px 1500px; } /* menos movimiento */
+}
+
+/* Título gamer */
+.ranking-title {
+  font-size: 1.6rem; /* reducido */
+  color: #00f7ff;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 12px #00f7ff, 0 0 24px #00f7ff;
+  font-weight: bold;
+  letter-spacing: 1px;
+  animation: glowPulse 2s infinite alternate;
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes glowPulse {
+  from { text-shadow: 0 0 10px #00f7ff; }
+  to { text-shadow: 0 0 24px #00f7ff, 0 0 48px #00f7ff; }
+}
+
+/* Canvas del gráfico */
+.ranking-bar canvas {
+  display: block;
+  margin: 0 auto;
+  max-width: 95%; /* un poco más pequeño */
+  position: relative;
+  z-index: 2;
+  transform: scale(0.95); /* compacta el gráfico */
+}
+
+/* Posición del jugador actual */
+.ranking-position {
+  margin-top: 0.8rem;
+  font-size: 1rem; /* reducido */
+  color: #00ff88;
+  text-shadow: 0 0 10px #00ff88, 0 0 20px #00ff88;
+  font-weight: bold;
+  background: rgba(0, 255, 136, 0.12);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  display: inline-block;
+  border: 1px solid rgba(0, 255, 136, 0.5);
+  position: relative;
+  z-index: 2;
+  animation: pulseGreen 1.5s infinite alternate;
+}
+
+@keyframes pulseGreen {
+  from { text-shadow: 0 0 8px #00ff88; transform: scale(1); }
+  to { text-shadow: 0 0 18px #00ff88, 0 0 36px #00ff88; transform: scale(1.03); }
+}
+
+/* Navegación por teclado */
+.ranking-keyboard-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem; /* más compacto */
+  justify-content: center;
+  margin-top: 0.8rem;
+  position: relative;
+  z-index: 2;
+}
+
+.ranking-bar-btn {
+  background: rgba(15, 15, 30, 0.8);
+  border: 1px solid #00f7ff;
+  color: #fff;
+  padding: 0.3rem 0.7rem; /* más pequeño */
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  font-size: 0.9rem; /* reducido */
+}
+
+.ranking-bar-btn:hover,
+.ranking-bar-btn:focus {
+  background: #00f7ff;
+  color: #000;
+  box-shadow: 0 0 10px #00f7ff, 0 0 20px #00f7ff;
+  outline: none;
+}
+
+/* Accesibilidad oculta para lectores de pantalla */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}

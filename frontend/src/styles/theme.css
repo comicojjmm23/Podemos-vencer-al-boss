@@ -1,0 +1,37 @@
+/* frontend/src/styles/theme.css */
+
+:root {
+    --color-dark-background: #1a1a2e;
+    --color-primary-accent: #e94560; /* Rojo/Rosa brillante */
+    --color-secondary-accent: #5e45e9; /* Púrpura */
+    --color-text-light: #f1f1f1;
+    --color-text-dim: #b0b0d0;
+    --color-success: #4caf50;
+    --color-error: #f44336;
+    --shadow-glow: 0 0 10px rgba(233, 69, 96, 0.6);
+}
+
+/* Solo aplicamos el fondo oscuro al body */
+body {
+    background-color: var(--color-dark-background);
+    color: var(--color-text-light);
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Dejamos el contenedor .App limpio para no interferir con el centrado absoluto */
+.App {
+    width: 100%;
+    /* Asegúrate de que no haya reglas de display:flex o min-height aquí */
+}
+
+/* Estilos de carga (loading) */
+.loading-screen {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5em;
+    color: var(--color-primary-accent);
+}

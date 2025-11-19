@@ -1,0 +1,142 @@
+.admin-items-container {
+  padding: 20px;
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
+  text-align: center;
+}
+
+.admin-items-container h2 {
+  font-size: 2rem;
+  color: #0ff;
+  text-shadow: 0 0 10px #0ff;
+  margin-bottom: 20px;
+}
+
+.admin-message {
+  margin: 10px 0;
+  color: #0ff;
+  text-shadow: 0 0 6px #0ff;
+}
+
+.admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 500px;
+  background: #111;
+  border: 2px solid #0ff;
+  border-radius: 12px;
+  box-shadow: 0 0 15px #0ff, inset 0 0 10px #08f;
+}
+
+.admin-form input,
+.admin-form textarea,
+.admin-form select {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #0ff;
+  background: #000;
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.admin-form input:focus,
+.admin-form textarea:focus,
+.admin-form select:focus {
+  border-color: #f0f;
+  box-shadow: 0 0 10px #f0f;
+}
+
+.btn-create {
+  background: linear-gradient(90deg, #0ff, #08f);
+  color: #000;
+  font-weight: bold;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  font-family: 'Orbitron', sans-serif;
+  text-transform: uppercase;
+}
+
+.btn-create:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #0ff, 0 0 40px #08f;
+}
+
+.items-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.item-card {
+  background: #111;
+  border: 2px solid #0ff;
+  border-radius: 12px;
+  padding: 15px;
+  width: 220px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-align: center;
+}
+
+.item-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #0ff;
+}
+
+.item-card h4 {
+  color: #ff0;
+  text-shadow: 0 0 6px #ff0;
+  margin-bottom: 8px;
+}
+
+.item-card p {
+  font-size: 0.9rem;
+  color: #ccc;
+  margin-bottom: 10px;
+}
+
+.item-type {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.9rem;
+  color: #f0f;
+  text-shadow: 0 0 6px #f0f;
+}
+
+.item-emblem {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: 2px solid #0ff;
+  box-shadow: 0 0 10px #0ff;
+}
+
+.btn-delete {
+  margin-top: 10px;
+  background: #f33;
+  border: none;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.btn-delete:hover {
+  background: #c00;
+  transform: scale(1.05);
+  box-shadow: 0 0 10px #f33;
+}
+

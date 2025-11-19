@@ -1,0 +1,175 @@
+/* =======================================================
+   MissionForm.css — Gamer HUD + Encuestas con respuestas
+   ======================================================= */
+
+/* Animaciones base */
+@keyframes neonPulse {
+  0%, 100% {
+    box-shadow: 0 0 6px #0ff, 0 0 12px #0ff;
+  }
+  50% {
+    box-shadow: 0 0 12px #0ff, 0 0 24px #0ff;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Card base */
+.mission-form {
+  background: radial-gradient(circle at top left, #0ff2, #002);
+  border: 2px solid #0ff;
+  border-radius: 12px;
+  padding: 20px;
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
+  box-shadow: 0 0 12px #0ff;
+  max-width: 700px; /* ✅ más ancho para preguntas + select */
+  margin: auto;
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* Titles */
+.neon-title {
+  font-size: 1.8em;
+  color: #0ff;
+  text-shadow: 0 0 6px #0ff;
+  margin-bottom: 20px;
+  animation: neonPulse 2s infinite;
+}
+
+.neon-subtitle {
+  font-size: 1.2em;
+  color: #0ff;
+  text-shadow: 0 0 4px #0ff;
+  margin-top: 20px;
+}
+
+/* Inputs */
+.input-group {
+  margin-bottom: 15px;
+  animation: fadeIn 0.4s ease-out;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #0ff;
+}
+
+.neon-input {
+  width: 100%;
+  padding: 10px;
+  background: #111;
+  border: 1px solid #0ff;
+  border-radius: 6px;
+  color: #0ff;
+  font-family: 'Orbitron', sans-serif;
+  box-shadow: inset 0 0 4px #0ff;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.neon-input:focus {
+  box-shadow: 0 0 8px #0ff;
+  outline: none;
+  transform: scale(1.02);
+}
+
+/* Buttons */
+.btn-primary,
+.btn-secondary {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: 'Orbitron', sans-serif;
+  margin-top: 10px;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary {
+  background: #0f0;
+  color: #000;
+  box-shadow: 0 0 6px #0f0;
+}
+
+.btn-secondary {
+  background: #222;
+  color: #0ff;
+  border: 1px solid #0ff;
+  box-shadow: 0 0 4px #0ff;
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 12px #0ff;
+}
+
+/* Feedback states */
+.loading-text,
+.success-text,
+.error-text {
+  font-weight: bold;
+  margin-top: 10px;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.loading-text {
+  color: #ff0;
+  text-shadow: 0 0 4px #ff0;
+}
+
+.success-text {
+  color: #0f0;
+  text-shadow: 0 0 4px #0f0;
+}
+
+.error-text {
+  color: #f00;
+  text-shadow: 0 0 4px #f00;
+}
+
+/* Survey section */
+.survey-section {
+  margin-top: 20px;
+  padding: 15px;
+  border: 1px dashed #0ff;
+  border-radius: 8px;
+  background: #111;
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Pregunta + selector de respuesta correcta */
+.survey-section .input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.survey-section .input-group select.neon-input {
+  max-width: 200px; /* ✅ selector más compacto */
+  align-self: flex-start;
+}
+
+/* Responsividad */
+@media (max-width: 600px) {
+  .mission-form {
+    padding: 15px;
+    max-width: 95%;
+  }
+  .neon-title {
+    font-size: 1.5em;
+  }
+  .neon-subtitle {
+    font-size: 1em;
+  }
+  .survey-section .input-group {
+    flex-direction: column;
+  }
+}

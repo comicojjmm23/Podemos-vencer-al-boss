@@ -1,0 +1,354 @@
+/* =======================================================
+    Dashboard.css — Estilo Gamer HUD Neón (FINAL OPTIMIZADO)
+    ======================================================= */
+
+/* Fuente gamer */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+/* --- 1. RESET CRÍTICO (SOLUCIÓN DOBLE SCROLL) --- */
+/* Esto elimina la barra de desplazamiento del navegador por defecto */
+html, body, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* 🚫 Bloquea el scroll del body */
+    background-color: #0f0f1a;
+    color: #e0e0e0;
+    font-family: 'Orbitron', sans-serif;
+}
+
+/* --- 2. Layout Principal (ÚNICO Scroll Permitido) --- */
+.dashboard-layout {
+    height: 100vh;      /* Ocupa toda la altura de la ventana */
+    width: 100%;
+    overflow-y: auto;   /* ✅ Solo ESTE contenedor hace scroll */
+    overflow-x: hidden; /* Evita scroll horizontal accidental */
+    
+    /* Fondo animado */
+    background: linear-gradient(-45deg, #4d004d, #330066, #1a0033, #003366, #004d99);
+    background-size: 400% 400%;
+    animation: neonGradient 15s ease infinite;
+    position: relative;
+}
+
+/* --- 3. Scrollbar Personalizado (Estilo Neón) --- */
+/* Webkit (Chrome, Safari) */
+.dashboard-layout::-webkit-scrollbar {
+    width: 8px; /* Barra delgada y elegante */
+}
+.dashboard-layout::-webkit-scrollbar-track {
+    background: #0a0a15; /* Fondo oscuro */
+    border-left: 1px solid #333;
+}
+.dashboard-layout::-webkit-scrollbar-thumb {
+    background: #00e5ff; /* Cyan Neón */
+    border-radius: 4px;
+    box-shadow: 0 0 10px #00e5ff; /* Brillo */
+    border: 2px solid #0a0a15; /* Espacio para efecto flotante */
+}
+.dashboard-layout::-webkit-scrollbar-thumb:hover {
+    background: #00aaff;
+}
+
+/* Firefox (Soporte agregado) */
+.dashboard-layout {
+    scrollbar-width: thin;
+    scrollbar-color: #00e5ff #0a0a15;
+}
+
+
+/* Partículas de fondo (FIXED para que no se muevan con el contenido) */
+.dashboard-layout::before {
+    content: "";
+    position: fixed; /* Fixed es clave para el efecto parallax */
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background-image: radial-gradient(#FFF 1px, transparent 1px);
+    background-size: 32px 32px;
+    animation: moveParticles 30s linear infinite, twinkle 5s ease-in-out infinite;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Scanlines retro (FIXED también) */
+.dashboard-layout::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.03) 0px,
+        rgba(255,255,255,0.03) 1px,
+        transparent 2px,
+        transparent 4px
+        );
+    opacity: 0.08;
+    z-index: 0;
+    pointer-events: none;
+}
+
+@keyframes neonGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+@keyframes moveParticles {
+    from { transform: translate(0, 0); }
+    to { transform: translate(32px, 32px); }
+}
+@keyframes twinkle {
+    0%   { opacity: 0.1; }
+    50%  { opacity: 0.5; }
+    100% { opacity: 0.1; }
+}
+
+/* --- Header Estilo HUD --- */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    /* Efecto cristal */
+    background: rgba(10, 10, 20, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid #00e5ff;
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    position: relative; 
+    padding-top: 20px;
+}
+
+/* A11Y: El H2 en el header */
+.dashboard-header h2 {
+    color: #00e5ff;
+    text-shadow: 0 0 8px #00e5ff, 0 0 15px #006eff;
+    animation: neon-glow 2s infinite alternate;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+@keyframes neon-glow {
+    0% { text-shadow: 0 0 5px #00e5ff, 0 0 10px #006eff; }
+    50% { text-shadow: 0 0 15px #00e5ff, 0 0 25px #006eff; }
+    100% { text-shadow: 0 0 5px #00e5ff, 0 0 10px #006eff; }
+}
+
+/* --- Botones de Acción --- */
+.btn-logout, .btn-back {
+    background: transparent;
+    border: 1px solid;
+    padding: 0.5rem 1.2rem;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    outline: none; /* Mejoramos el estilo de foco con el hover/shadow */
+}
+
+.btn-logout {
+    border-color: #ff004c;
+    color: #ff004c;
+}
+.btn-logout:hover, .btn-logout:focus {
+    background: rgba(255, 0, 76, 0.2);
+    color: #fff;
+    box-shadow: 0 0 15px #ff004c, 0 0 20px rgba(255, 0, 76, 0.5); /* Foco visible */
+}
+
+.btn-back {
+    border-color: #00e5ff;
+    color: #00e5ff;
+}
+.btn-back:hover, .btn-back:focus {
+    background: rgba(0, 229, 255, 0.2);
+    color: #fff;
+    box-shadow: 0 0 15px #00e5ff, 0 0 20px rgba(0, 229, 255, 0.5); /* Foco visible */
+}
+
+/* Contenedor Flex para botones de acción (ej. Restablecer contraseña) */
+.actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    /* Ajuste para que los botones dentro del div.actions tomen el espacio */
+}
+.actions .btn-secondary, .actions .btn-primary {
+    flex: 1; 
+    margin: 0; /* Anulamos el margen superior de btn-primary */
+}
+
+
+/* --- Stats Bar (3D) --- */
+.stats-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    padding: 1.5rem 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.stat-card {
+    padding: 1rem;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    box-shadow: 0 0 15px rgba(0,0,0,0.6);
+    text-shadow: 0 0 5px rgba(0,0,0,0.8);
+    transform: perspective(500px) rotateX(5deg);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-size: 1rem;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(0,0,0,0.4);
+}
+.stat-card:hover {
+    transform: perspective(500px) rotateX(0deg) scale(1.05);
+    box-shadow: 0 0 20px currentColor;
+}
+
+/* Gradientes Stats */
+.stat-card.level { border-color: #6a00ff; color: #b080ff; }
+.stat-card.xp    { border-color: #00ff88; color: #80ffc0; }
+.stat-card.coins { border-color: #ffcc00; color: #ffe080; }
+
+.stat-card span {
+    font-size: 1.2rem;
+    margin-left: 0.5rem;
+    display: inline-block;
+}
+
+/* --- Grid y Tarjetas --- */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 0 2rem 2rem 2rem; 
+    position: relative;
+    z-index: 1;
+}
+
+.card {
+    background: rgba(16, 18, 30, 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    transition: 0.3s;
+    overflow: hidden; 
+    color: #e0e0ff;
+}
+
+.card:hover {
+    border-color: #00e5ff;
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+    transform: translateY(-3px);
+}
+
+/* H2/H3/H4: Estilo base para los títulos dentro de las tarjetas */
+.card h2, .card h3, .card h4 {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    text-shadow: 0 0 5px rgba(255,255,255,0.5);
+}
+
+/* Colores por tarjeta */
+.profile-card { border-left: 4px solid #00e5ff; }
+.profile-card h2, .profile-card h3 { color: #00e5ff; border-bottom-color: rgba(0, 229, 255, 0.3); }
+
+.ranking-card { border-left: 4px solid #ff00ff; }
+.ranking-card h2, .ranking-card h3 { color: #ff00ff; border-bottom-color: rgba(255, 0, 255, 0.3); }
+
+.missions-card { border-left: 4px solid #00ffaa; }
+.missions-card h2, .missions-card h3 { color: #00ffaa; border-bottom-color: rgba(0, 255, 170, 0.3); }
+
+.achievements-card { border-left: 4px solid #ffcc00; }
+.achievements-card h2, .achievements-card h3 { color: #ffcc00; border-bottom-color: rgba(255, 204, 0, 0.3); }
+
+.access-card { border-top: 4px solid #fff; }
+
+/* --- Botones Menú --- */
+.access-card button {
+    flex: 1;
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: rgba(0, 0, 0, 0.4);
+    color: #ccc;
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    min-width: 120px;
+    outline: none; /* Quitamos el focus nativo */
+}
+.access-card button:hover, .access-card button:focus {
+    transform: scale(1.05);
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 0 15px currentColor; /* Foco visible con el color del hover */
+}
+
+/* Colores hover menú */
+.access-card button:nth-child(1):hover, .access-card button:nth-child(1):focus { box-shadow: 0 0 15px #ff00cc, inset 0 0 10px #ff00cc; color: #ff00cc; }
+.access-card button:nth-child(2):hover, .access-card button:nth-child(2):focus { box-shadow: 0 0 15px #6600ff, inset 0 0 10px #6600ff; color: #6600ff; }
+.access-card button:nth-child(3):hover, .access-card button:nth-child(3):focus { box-shadow: 0 0 15px #00ccff, inset 0 0 10px #00ccff; color: #00ccff; }
+.access-card button:nth-child(4):hover, .access-card button:nth-child(4):focus { box-shadow: 0 0 15px #ffcc00, inset 0 0 10px #ffcc00; color: #ffcc00; }
+.access-card button:nth-child(5):hover, .access-card button:nth-child(5):focus { box-shadow: 0 0 15px #00ff99, inset 0 0 10px #00ff99; color: #00ff99; }
+.access-card button:nth-child(6):hover, .access-card button:nth-child(6):focus { box-shadow: 0 0 15px #cc00ff, inset 0 0 10px #cc00ff; color: #cc00ff; }
+.access-card button:nth-child(7):hover, .access-card button:nth-child(7):focus { box-shadow: 0 0 15px #00ffff, inset 0 0 10px #00ffff; color: #00ffff; }
+
+/* --- Otros --- */
+.achievements-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 15px; }
+
+.loading-screen {
+    display: flex; justify-content: center; align-items: center; height: 100vh;
+    background: #0a0a10; color: #00e5ff; font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem; text-transform: uppercase; letter-spacing: 3px;
+    animation: pulseLoad 1.5s infinite alternate; z-index: 100; position: fixed; top: 0; left: 0; width: 100%;
+}
+@keyframes pulseLoad { from { text-shadow: 0 0 10px #00e5ff; opacity: 0.7; } to { text-shadow: 0 0 20px #00e5ff, 0 0 30px #00e5ff; opacity: 1; } }
+
+/* =======================================================
+    Estilos Logo / Banner
+    ======================================================= */
+
+.dashboard-logo-banner {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    padding: 10px 0;
+    margin-top: -30px; 
+    margin-bottom: 20px;
+}
+
+.dashboard-logo-small {
+    width: 120px; 
+    height: auto;
+    filter: drop-shadow(0 0 8px rgba(0, 247, 255, 0.8)); 
+    opacity: 0.8; 
+    transition: all 0.3s ease;
+}
+
+.dashboard-logo-small:hover {
+    opacity: 1;
+    filter: drop-shadow(0 0 15px rgba(0, 247, 255, 1));
+    transform: scale(1.05);
+}

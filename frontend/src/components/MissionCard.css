@@ -1,0 +1,304 @@
+/* =======================================================
+    MissionCard.css
+    Estilos neon gamer ACCESIBLES para MissionCard.jsx (FINAL)
+    ======================================================= */
+
+.mission-review-card {
+    /* Aumentado ligeramente el fondo para asegurar mejor contraste con texto claro */
+    background: #151525; 
+    border: 2px solid #00f7ff;
+    border-radius: 12px;
+    padding: 1rem;
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    position: relative;
+    /* Añadido un foco (outline) sutil por defecto en hover, además del transform */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, outline 0.2s;
+    outline: 2px solid transparent; /* Foco invisible por defecto */
+}
+
+/* A11Y: Foco visible en la tarjeta si se usa como enlace o tiene botones importantes dentro */
+.mission-review-card:focus-within {
+    outline: 2px solid #33ff00; /* Foco de alto contraste */
+    outline-offset: 4px;
+    box-shadow: 0 0 15px rgba(51, 255, 0, 0.5); 
+}
+
+.mission-review-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 12px #00f7ff;
+}
+
+/* Estados de dificultad */
+.mission-review-card.easy {
+    border-color: #00ff88;
+}
+
+.mission-review-card.medium {
+    border-color: #ffaa00;
+}
+
+.mission-review-card.hard {
+    border-color: #ff4d88;
+}
+
+/* Estado completado */
+.mission-review-card.completed {
+    border-color: #00ff88;
+    opacity: 0.95; /* Ligeramente más sólido para mejor contraste */
+    background: linear-gradient(135deg, #0f0f1e, #1a1a2e);
+}
+
+/* HUD flotante gamer */
+.mission-hud {
+    position: absolute;
+    top: -12px;
+    right: 12px;
+    /* Aumentado el fondo para mejorar el contraste del texto verde */
+    background: rgba(0, 255, 136, 0.25); 
+    border: 2px solid #00ff88;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #00ff88;
+    text-shadow: 0 0 6px #00ff88, 0 0 12px #00ff88;
+    animation: hudPulse 2s infinite alternate, hudSlide 0.6s ease-out;
+    z-index: 10;
+}
+
+@keyframes hudPulse {
+    0% { box-shadow: 0 0 6px #00ff88; }
+    100% { box-shadow: 0 0 16px #00ff88; }
+}
+
+@keyframes hudSlide {
+    from { opacity: 0; transform: translateY(-20px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .mission-hud { animation: none; }
+}
+
+/* Header con checklist */
+.mission-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mission-checklist {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+/* A11Y: Aseguramos el foco del checkbox si se usa */
+.mission-checklist input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #00ff88;
+    cursor: default;
+}
+.mission-checklist input[type="checkbox"]:focus {
+    outline: 2px solid #00f7ff;
+    outline-offset: 2px;
+}
+
+.mission-status-label {
+    font-size: 0.9rem;
+    font-weight: bold;
+    /* A11Y: Añadido un pequeño margen para separación */
+    margin-left: 0.2rem;
+}
+
+.mission-review-card.completed .mission-status-label {
+    color: #00ff88;
+    text-shadow: 0 0 6px #00ff88;
+}
+
+.mission-review-card:not(.completed) .mission-status-label {
+    /* A11Y: Aumentamos el brillo del amarillo/naranja para contraste */
+    color: #ffd000; 
+    text-shadow: 0 0 6px #ffaa00;
+}
+
+/* Títulos y textos */
+.mission-title {
+    font-size: 1.3rem;
+    color: #fff;
+    margin: 0;
+}
+
+.mission-difficulty {
+    font-size: 0.95rem;
+    color: #ccc;
+    letter-spacing: 1px;
+}
+
+.mission-reward {
+    font-size: 1rem;
+    /* A11Y: Aumentado el brillo del color cian para contraste */
+    color: #33ffff; 
+    font-weight: bold;
+}
+
+.student-message,
+.submitted-file {
+    font-size: 0.95rem;
+    /* A11Y: Aumentado el color de fondo para mejorar el contraste con el texto */
+    color: #f0f0ff; 
+    background: rgba(255, 255, 255, 0.15);
+    padding: 0.6rem;
+    border-radius: 8px;
+    /* Añadido un borde sutil para definir los bloques */
+    border: 1px solid rgba(0, 229, 255, 0.1); 
+}
+
+/* Botones de acción */
+.actions {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: 0.5rem;
+}
+
+.mission-action-btn {
+    flex: 1;
+    padding: 0.7rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    outline: none;
+    text-transform: uppercase; /* Uniformidad con el tema gamer */
+    font-family: 'Orbitron', sans-serif; /* Consistencia de fuente */
+}
+
+/* A11Y: Foco visible y consistente */
+.mission-action-btn:focus {
+    outline: 3px solid #ffcc00; /* Foco neón de alto contraste (amarillo) */
+    outline-offset: 2px;
+    transform: scale(1.05); /* Mantiene la escala del hover */
+}
+
+.mission-action-btn.submit {
+    background: #00f7ff;
+    color: #0f0f1e;
+}
+
+.mission-action-btn.approve {
+    background: #00ff88;
+    color: #0f0f1e;
+}
+
+.mission-action-btn.reject {
+    /* A11Y: Aumentamos el contraste del texto */
+    background: #ff004c; 
+    color: #fff;
+}
+
+.mission-action-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 8px currentColor;
+}
+
+
+/* =======================================================
+    Botón de chat gamer neon
+    ======================================================= */
+
+.mission-action-btn.chat {
+    background: linear-gradient(90deg, #00f7ff, #00ffaa);
+    border: none;
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    color: #0e0e1a;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 6px rgba(0, 255, 255, 0.8);
+    box-shadow: 0 0 12px rgba(0, 255, 255, 0.6), inset 0 0 6px rgba(0, 255, 255, 0.4);
+}
+
+.mission-action-btn.chat:hover {
+    background: linear-gradient(90deg, #00ffaa, #00f7ff);
+    color: #fff;
+    box-shadow: 0 0 20px #00f7ff, 0 0 30px #00ffaa;
+    transform: scale(1.05);
+}
+/* A11Y: Aseguramos que el foco sea visible */
+.mission-action-btn.chat:focus {
+    outline: 3px solid #ffcc00;
+    outline-offset: 2px;
+}
+
+.mission-action-btn.chat:active {
+    transform: scale(0.95);
+    box-shadow: 0 0 10px #00ffaa, inset 0 0 8px #00f7ff;
+}
+
+/* =======================================================
+    Botón de encuesta — estilo violeta estelar
+    ======================================================= */
+
+.mission-action-btn.survey {
+    background: linear-gradient(90deg, #a855f7, #9333ea);
+    border: none;
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 12px rgba(148, 0, 211, 0.6), inset 0 0 6px rgba(148, 0, 211, 0.4);
+}
+
+.mission-action-btn.survey:hover {
+    background: linear-gradient(90deg, #9333ea, #a855f7);
+    box-shadow: 0 0 20px #a855f7, 0 0 30px #9333ea;
+    transform: scale(1.05);
+}
+/* A11Y: Aseguramos que el foco sea visible */
+.mission-action-btn.survey:focus {
+    outline: 3px solid #ffcc00;
+    outline-offset: 2px;
+}
+
+.mission-action-btn.survey:active {
+    transform: scale(0.95);
+    box-shadow: 0 0 10px #9333ea, inset 0 0 8px #a855f7;
+}
+
+/* Accesibilidad extra: alto contraste */
+@media (forced-colors: active) {
+    .mission-review-card {
+        border: 2px solid CanvasText;
+        background: Canvas;
+        color: CanvasText;
+    }
+
+    .mission-action-btn {
+        border: 1px solid ButtonText;
+        background: ButtonFace;
+        color: ButtonText;
+    }
+    
+    /* A11Y: Asegura que el color de fondo en HC no sea demasiado bajo */
+    .mission-action-btn.reject {
+        background: ButtonFace !important; 
+        color: ButtonText !important;
+        border: 2px solid Highlight;
+    }
+
+    .mission-action-btn:focus {
+        outline: 2px solid Highlight;
+        outline-offset: 3px;
+        box-shadow: none;
+        transform: none;
+    }
+}

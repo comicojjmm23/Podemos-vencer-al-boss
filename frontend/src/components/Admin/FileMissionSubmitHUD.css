@@ -1,0 +1,43 @@
+.file-submit-card {
+  background: #111;
+  border: 2px solid #0ff;
+  padding: 20px;
+  border-radius: 12px;
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
+  box-shadow: 0 0 12px #0ff;
+  max-width: 500px;
+  margin: auto;
+}
+
+.file-submit-card h2 {
+  color: #0ff;
+  text-shadow: 0 0 4px #0ff;
+}
+
+.file-submit-card input,
+.file-submit-card textarea {
+  width: 100%;
+  margin: 10px 0;
+  padding: 8px;
+  background: #222;
+  border: 1px solid #0ff;
+  color: #0ff;
+  border-radius: 6px;
+}
+
+.file-submit-card button {
+  background: #0f0;
+  color: #000;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 0 6px #0f0;
+}
+
+.file-name {
+  font-size: 0.9em;
+  color: #0ff;
+}

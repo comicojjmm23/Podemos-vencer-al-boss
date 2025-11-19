@@ -1,0 +1,432 @@
+/* =======================================================
+    AuthScreen.css — HUD Neón Vívido (WCAG Refactor)
+    ======================================================= */
+
+/* Fuente gamer */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');
+
+/* Reset global */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* --- Contenedor Principal y Fondo Vívido --- */
+.auth-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Orbitron', sans-serif;
+    overflow: hidden;
+    position: relative;
+    /* Aumentamos el brillo base del texto a #f0f0f0 para asegurar contraste en áreas borrosas */
+    color: #f0f0f0; 
+
+    /* === FONDO VÍVIDO === */
+    background: linear-gradient(-45deg, #4d004d, #330066, #1a0033, #003366, #004d99);
+    background-size: 400% 400%;
+    animation: neonGradient 15s ease infinite;
+}
+
+@keyframes neonGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Partículas/Estrellas flotantes */
+.auth-container::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background-image: radial-gradient(#FFF 1px, transparent 1px);
+    background-size: 32px 32px;
+    animation: moveParticles 30s linear infinite, 
+               twinkle 5s ease-in-out infinite;
+    z-index: 0;
+}
+
+@keyframes moveParticles {
+    from { transform: translate(0, 0); }
+    to { transform: translate(32px, 32px); }
+}
+
+/* Scanlines retro */
+.auth-container::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.04) 0px,
+        rgba(255,255,255,0.04) 1px,
+        transparent 2px,
+        transparent 4px
+    );
+    opacity: 0.08;
+    z-index: 0;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    0%   { opacity: 0.1; }
+    50%  { opacity: 0.5; }
+    100% { opacity: 0.1; }
+}
+
+/* --- Tarjeta de Autenticación --- */
+.auth-card {
+    position: relative;
+    z-index: 1;
+    background: rgba(15, 15, 30, 0.95); /* Aumentado la opacidad para mejorar el contraste de fondo */
+    border: 2px solid #00e5ff;
+    border-radius: 18px;
+    padding: 2.8rem 2.2rem 2.2rem 2.2rem;
+    width: 100%;
+    max-width: 450px;
+    text-align: center;
+    
+    /* Sombra neón intensa */
+    box-shadow: 0 0 25px rgba(0, 229, 255, 0.4),
+                inset 0 0 20px rgba(0, 229, 255, 0.15);
+                
+    backdrop-filter: blur(12px);
+    overflow: visible;
+    margin-top: 120px; 
+    
+    /* MEJORA DE ACCESIBILIDAD: Reset de Focus para usar un estilo propio */
+    outline: none; 
+}
+
+/* Animación de entrada */
+.auth-card {
+    animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- LOGO GAMER FLOTANTE --- */
+.logo-container {
+    position: absolute;
+    top: -160px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.auth-logo {
+    width: 300px;
+    height: auto;
+    border-radius: 15px;
+    mix-blend-mode: screen; 
+    filter: brightness(1.7) drop-shadow(0 0 15px #00e5ff);
+    animation: hologramFloat 4s ease-in-out infinite;
+}
+
+@keyframes hologramFloat {
+    0%, 100% { transform: translateY(0); opacity: 0.95; }
+    50% { transform: translateY(-12px); opacity: 1; }
+}
+
+/* Título */
+.title {
+    color: #33ff00; /* CAMBIO: Título a verde neón para alto contraste (el cyan puede ser bajo contra el fondo oscuro) */
+    font-size: 2.1rem;
+    margin-bottom: 1.8rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 
+        0 0 15px rgba(51, 255, 0, 0.7), /* Sombra verde */
+        0 0 30px rgba(51, 255, 0, 0.4); 
+}
+
+/* --- Formulario y Inputs --- */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.3rem;
+    width: 100%;
+}
+
+.input-group {
+    position: relative;
+    width: 100%;
+}
+
+.auth-input {
+    width: 100%;
+    padding: 1.1rem 1rem 1.1rem 3.5rem;
+    border: 2px solid #00e5ff; /* CAMBIO: Borde más grueso para foco visual */
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.8); /* CAMBIO: Fondo más oscuro para contraste del texto */
+    color: #ffffff; /* CAMBIO: Texto del input a blanco puro para asegurar el contraste */
+    font-family: 'Orbitron', sans-serif;
+    outline: none;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+/* ESTILO DE FOCO PARA INPUTS: Mantiene el estilo gamer y alta visibilidad */
+.auth-input:focus {
+    border-color: #33ff00; /* CAMBIO: Borde de foco a verde neón para contraste */
+    box-shadow: 0 0 15px rgba(51, 255, 0, 0.6), 0 0 25px rgba(51, 255, 0, 0.3); /* Sombra de foco verde */
+    background: rgba(0, 0, 0, 0.9);
+    
+    /* MEJORA DE ACCESIBILIDAD: Anillo de foco alternativo para navegación con Tab */
+    outline: 2px solid #33ff00; 
+    outline-offset: 3px;
+}
+
+.auth-input::placeholder {
+    /* CAMBIO CLAVE: Los placeholders deben tener suficiente contraste */
+    color: #999999; /* Color gris claro que debería tener buen contraste si se usa (aunque se usa el truco del label) */
+}
+
+.input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #00e5ff;
+    font-size: 1.2rem;
+    pointer-events: none;
+}
+
+/* --- Estilo de Label Flotante (Contraste mejorado) --- */
+.auth-label {
+    position: absolute;
+    left: 45px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ffffff; /* CAMBIO CLAVE: Etiqueta blanca para contraste en estado normal */
+    font-size: 0.95rem;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    background: transparent;
+    padding: 0 4px;
+}
+
+.auth-input:focus + .auth-label,
+.auth-input:not(:placeholder-shown) + .auth-label {
+    top: -12px;
+    left: 10px;
+    font-size: 0.8rem;
+    color: #33ff00; /* CAMBIO: Etiqueta activa en verde neón de alto contraste */
+    background: #0f0f1e; 
+    border-radius: 4px;
+    text-shadow: 0 0 8px rgba(51, 255, 0, 0.5); /* Sombra para la etiqueta activa */
+}
+
+/* --- Botones --- */
+.btn-primary {
+    width: 100%;
+    padding: 1.1rem;
+    margin-top: 0.8rem;
+    background: linear-gradient(90deg, #33ff00, #00e600);
+    border: none;
+    border-radius: 10px;
+    color: #000;
+    /* Reducimos la sombra del texto para no causar artefactos de color */
+    text-shadow: 0 0 3px rgba(0,0,0,0.4); 
+    font-weight: 800;
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(51, 255, 0, 0.6);
+    min-height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ESTILO DE FOCO PARA BOTONES PRIMARIOS */
+.btn-primary:focus {
+    /* Mantiene el estilo hover */
+    transform: scale(1.03); 
+    box-shadow: 0 0 30px rgba(51, 255, 0, 0.9), 0 0 50px rgba(0, 230, 0, 0.5);
+    filter: brightness(1.2);
+    /* MEJORA DE ACCESIBILIDAD: Anillo de foco externo */
+    outline: 2px solid #00e5ff; 
+    outline-offset: 5px;
+}
+
+
+.btn-primary:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 30px rgba(51, 255, 0, 0.9), 0 0 50px rgba(0, 230, 0, 0.5);
+    filter: brightness(1.2);
+}
+
+.btn-primary:disabled {
+    filter: grayscale(0.8);
+    cursor: not-allowed;
+    box-shadow: none;
+    /* MEJORA DE ACCESIBILIDAD: Quitamos el foco si está deshabilitado */
+    outline: none; 
+}
+
+.btn-secondary {
+    width: 100%;
+    padding: 1rem;
+    background: transparent;
+    border: 2px solid #00e5ff;
+    color: #00e5ff;
+    border-radius: 10px;
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 1.2rem;
+    min-height: 50px;
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+}
+
+/* ESTILO DE FOCO PARA BOTONES SECUNDARIOS */
+.btn-secondary:focus {
+    /* Mantiene el estilo hover */
+    background: rgba(0, 229, 255, 0.15);
+    box-shadow: 0 0 18px rgba(0, 229, 255, 0.6);
+    /* MEJORA DE ACCESIBILIDAD: Anillo de foco externo */
+    outline: 2px solid #33ff00; 
+    outline-offset: 5px;
+}
+
+.btn-secondary:hover {
+    background: rgba(0, 229, 255, 0.15);
+    box-shadow: 0 0 18px rgba(0, 229, 255, 0.6);
+}
+
+/* --- Acciones secundarias (links) --- */
+.toggle-mode {
+    margin-top: 1.2rem;
+    font-size: 0.9rem;
+    color: #ffffff; /* CAMBIO CLAVE: Texto base a blanco puro para contraste */
+    font-family: sans-serif;
+    line-height: 1.4;
+}
+
+.toggle-mode span {
+    color: #33ff00; /* CAMBIO: El link principal a verde neón para alto contraste */
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    margin-left: 5px;
+    transition: color 0.2s, text-shadow 0.2s;
+    
+    /* MEJORA DE ACCESIBILIDAD: Foco en el elemento clickeable */
+    outline: none;
+}
+
+/* ESTILO DE FOCO PARA LINKS (SPAN clickeable) */
+.toggle-mode span:focus {
+    text-decoration: underline;
+    text-shadow: 0 0 8px #33ff00; /* Sombra verde */
+    color: #66ff66; /* Verde más brillante */
+    /* MEJORA DE ACCESIBILIDAD: Anillo de foco claro */
+    outline: 2px solid #00e5ff; 
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+.toggle-mode span:hover {
+    text-decoration: underline;
+    text-shadow: 0 0 8px #33ff00; /* Sombra verde */
+    color: #66ff66; /* Verde más brillante */
+}
+
+/* --- Spinner --- */
+.spinner-neon {
+    width: 26px;
+    height: 26px;
+    border: 4px solid rgba(255, 255, 255, 0.3); /* CAMBIO: Borde menos oscuro para evitar el error de contraste con el fondo oscuro del botón */
+    border-top-color: #ffffff; /* CAMBIO: Color superior más claro para girar */
+    border-radius: 50%;
+    animation: spin 0.9s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* --- Mensajes --- */
+.message {
+    padding: 1rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    text-align: center;
+    margin-bottom: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+.error-message {
+    /* CAMBIO CLAVE: Aumentado el color base y reducido el fondo para asegurar contraste */
+    background: rgba(255, 0, 80, 0.1); 
+    border: 1px solid #ff5080;
+    color: #ff5080; /* Asegurado el color del texto */
+    box-shadow: 0 0 10px rgba(255, 0, 80, 0.3);
+}
+.success-message {
+    /* CAMBIO CLAVE: Aumentado el color base y reducido el fondo para asegurar contraste */
+    background: rgba(0, 255, 128, 0.1);
+    border: 1px solid #00ff80;
+    color: #00ff80; /* Asegurado el color del texto */
+    box-shadow: 0 0 10px rgba(0, 255, 128, 0.3);
+}
+
+/* HUD Bienvenida */
+.hud-success {
+    border: 2px solid #00ff80;
+    background: rgba(0, 255, 128, 0.15);
+    padding: 1.2rem;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 0 20px rgba(0, 255, 128, 0.4);
+    animation: fadeInHUD 0.8s ease-out, pulseGlow 2.5s infinite;
+}
+.hud-text { 
+    color: #33ff00; /* CAMBIO: Color de alto contraste (verde) */
+    font-weight: 700; 
+    font-size: 1.3rem; 
+    text-shadow: 0 0 10px #33ff00;
+    letter-spacing: 1px;
+}
+.hud-subtext { 
+    color: #ffffff; /* CAMBIO CLAVE: Color a blanco puro para asegurar el contraste */
+    font-size: 0.95rem; 
+    margin-top: 0.6rem; 
+    text-shadow: 0 0 5px #00ff80;
+}
+
+@keyframes fadeInHUD {
+    from { opacity: 0; transform: translateY(-15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 15px rgba(0,255,128,0.4); }
+    50% { box-shadow: 0 0 25px rgba(0,255,128,0.8); }
+}
+
+/* Pregunta de seguridad */
+.security-question {
+    color: #ffffff; /* CAMBIO CLAVE: Texto a blanco puro para contraste */
+    background: rgba(0, 229, 255, 0.15);
+    padding: 1.2rem;
+    border-radius: 10px;
+    margin-bottom: 1.2rem;
+    border-left: 5px solid #00e5ff;
+    font-size: 1.15rem;
+    line-height: 1.4;
+    text-shadow: 0 0 8px rgba(0, 229, 255, 0.4);
+}

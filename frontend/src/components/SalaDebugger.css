@@ -1,0 +1,37 @@
+.sala-debugger {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(20, 20, 30, 0.9);
+  border: 2px solid #00ffff;
+  border-radius: 12px;
+  padding: 16px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 14px;
+  color: #fff;
+  z-index: 9999;
+  box-shadow: 0 0 12px #00ffff;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.status.ok { color: #00ff88; }
+.status.fail { color: #ff4444; }
+.fetch.ok { color: #00ff88; }
+.fetch.fail { color: #ff4444; }
+.fetch.pending { color: #ffaa00; }
+.ping { margin-top: 6px; color: #00ffff; }
+.error { margin-top: 6px; color: #ff4444; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.room-info {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #ccc;
+}
+.existence.ok { color: #00ff88; }
+.existence.fail { color: #ff4444; }
+.title { color: #00ffff; margin-top: 4px; }
+.count { color: #ffaa00; margin-top: 2px; }

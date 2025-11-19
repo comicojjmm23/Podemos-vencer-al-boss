@@ -1,0 +1,211 @@
+/* =======================================================
+   AdminPanel.css — Gamer HUD + Accesibilidad WCAG 2.1
+   ======================================================= */
+
+/* --- Contenedor Principal --- */
+.admin-panel-container {
+  background: #0a0a14;
+  border: 2px solid #ff00ff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 0 30px rgba(255, 0, 255, 0.4), inset 0 0 15px rgba(255, 0, 255, 0.2);
+  color: #e0e0ff;
+  font-family: 'Orbitron', sans-serif;
+  transition: all 0.3s ease;
+  outline: none;
+}
+.admin-panel-container:focus-within {
+  outline: 3px solid #00ffff;
+  outline-offset: 4px;
+}
+
+/* --- Título --- */
+.admin-panel-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #ff00ff;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid rgba(255, 0, 255, 0.5);
+  text-shadow: 0 0 10px #ff00ff, 0 0 20px rgba(255, 0, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* --- Pestañas --- */
+.admin-tab-list {
+  display: flex;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+}
+.admin-tab-btn {
+  background: transparent;
+  border: none;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  color: #b0e0ff;
+  font-family: 'Orbitron', sans-serif;
+  text-transform: uppercase;
+  outline: none;
+}
+.admin-tab-btn:hover {
+  color: #fff;
+  text-shadow: 0 0 8px #00ffff;
+}
+.admin-tab-btn.active {
+  color: #ff00ff;
+  border-bottom: 3px solid #ff00ff;
+  text-shadow: 0 0 12px #ff00ff, 0 0 20px rgba(255, 0, 255, 0.4);
+}
+.admin-tab-btn:focus-visible {
+  outline: 3px solid #33ff00;
+  outline-offset: 3px;
+  border-radius: 4px;
+  color: #33ff00;
+}
+
+/* --- Panel de contenido --- */
+.admin-tab-content-wrapper {
+  min-height: 200px;
+}
+.admin-tab-panel {
+  padding-top: 10px;
+}
+
+/* --- Botones externos --- */
+.admin-external-btn {
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  font-family: 'Orbitron', sans-serif;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  outline: none;
+}
+.admin-external-btn:focus-visible {
+  box-shadow: 0 0 15px currentColor;
+  outline: 3px solid #ffcc00;
+  outline-offset: 3px;
+}
+.create-mission-btn {
+  background: linear-gradient(90deg, #6600ff, #00ffff);
+  border: 2px solid #00ffff;
+  color: #fff;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+}
+.create-mission-btn:hover,
+.create-mission-btn:focus-visible {
+  background: linear-gradient(90deg, #00ffff, #6600ff);
+  box-shadow: 0 0 25px #00ffff, 0 0 35px #6600ff;
+  transform: translateY(-2px);
+}
+
+/* --- Formularios --- */
+.mission-form-container {
+  padding: 1.5rem;
+  background-color: rgba(25, 25, 40, 0.9);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 0, 255, 0.2);
+  box-shadow: inset 0 0 10px rgba(255, 0, 255, 0.1);
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.form-group label {
+  color: #ff00ff;
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+  display: block;
+  font-weight: 700;
+}
+.minimal-input {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid #ff00ff;
+  border-radius: 6px;
+  color: #ffffff;
+  box-shadow: 0 0 5px rgba(255, 0, 255, 0.3);
+  transition: border-color 0.2s, box-shadow 0.3s;
+  font-size: 1rem;
+  font-family: 'Orbitron', sans-serif;
+  outline: none;
+}
+.minimal-input:focus-visible {
+  border-color: #00ffff;
+  box-shadow: 0 0 15px #00ffff, 0 0 20px rgba(0, 255, 255, 0.4);
+}
+.submit-btn {
+  background: linear-gradient(90deg, #db2777, #ff00ff);
+  color: white;
+  font-weight: 800;
+  padding: 0.7rem 2rem;
+  border-radius: 25px;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-family: 'Orbitron', sans-serif;
+  box-shadow: 0 0 10px rgba(255, 0, 255, 0.6);
+  outline: none;
+}
+.submit-btn:hover:not(:disabled) {
+  background: linear-gradient(90deg, #ff00ff, #db2777);
+  box-shadow: 0 0 20px #ff00ff, 0 0 30px rgba(255, 0, 255, 0.8);
+  transform: translateY(-1px);
+}
+.submit-btn:focus-visible {
+  outline: 3px solid #00ffff;
+  outline-offset: 3px;
+}
+.submit-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* --- Responsividad --- */
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 480px) {
+  .admin-tab-btn {
+    font-size: 0.85rem;
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+/* --- Animación segura --- */
+@media (prefers-reduced-motion: no-preference) {
+  .admin-tab-btn:hover {
+    transform: scale(1.05);
+    filter: brightness(1.2);
+  }
+}
+/* Contenedor de MissionList */
+.mission-list-container {
+  background: rgba(10, 10, 20, 0.95);
+  border: 2px solid #ff00ff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
+  color: #e0e0ff;
+  font-family: 'Orbitron', sans-serif;
+
+  /* ✅ Ajustes para que el modal se vea completo */
+  min-height: 80vh;       /* alarga la tarjeta */
+  max-height: 90vh;       /* evita que se salga de pantalla */
+  overflow-y: auto;       /* permite scroll si el contenido excede */
+}

@@ -1,0 +1,161 @@
+/* Contenedor principal */
+.history-container {
+  padding: 20px;
+  background: radial-gradient(circle at top left, #1a1a2e, #0f0f1a);
+  border: 2px solid #0ff;
+  border-radius: 12px;
+  margin-top: 20px;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+  font-family: 'Orbitron', sans-serif;
+}
+
+/* Título */
+.history-container h2 {
+  color: #0ff;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #ff00ff;
+  padding-bottom: 10px;
+  text-shadow: 0 0 8px #0ff, 0 0 15px #00f;
+  animation: neonPulse 2s infinite alternate;
+}
+
+/* Tabla */
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.history-table th,
+.history-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #3c3c60;
+}
+
+.history-table th {
+  background-color: #3c3c60;
+  color: #00ffaa;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.history-table tr:nth-child(even) {
+  background-color: #2e2e4e;
+}
+
+.history-table tr:hover,
+.history-table tr:focus {
+  background-color: #38385d;
+  outline: none;
+  box-shadow: 0 0 10px #0ff;
+  transition: box-shadow 0.3s ease;
+}
+
+/* Columnas especiales */
+.xp-col {
+  color: #00ffaa;
+  font-weight: bold;
+  text-shadow: 0 0 5px #00ffaa;
+}
+
+.coins-col {
+  color: #ffd700;
+  font-weight: bold;
+  text-shadow: 0 0 5px #ffd700;
+}
+
+/* Mensajes */
+.history-message.error {
+  color: #ff004c;
+  background: rgba(255, 0, 76, 0.2);
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ff004c;
+  text-align: center;
+}
+
+.no-history {
+  text-align: center;
+  padding: 30px;
+  color: #aaa;
+  font-style: italic;
+}
+
+/* Dificultad gamer */
+.difficulty-easy td {
+  color: #00ffaa;
+}
+
+.difficulty-medium td {
+  color: #ffcc00;
+}
+
+.difficulty-hard td {
+  color: #ff004c;
+}
+
+.difficulty-boss td {
+  color: #ff00ff;
+  font-weight: bold;
+  text-shadow: 0 0 5px #ff00ff, 0 0 10px #0ff;
+}
+
+/* Animaciones neon */
+@keyframes neonPulse {
+  0% {
+    text-shadow: 0 0 5px #0ff, 0 0 10px #00f;
+  }
+  100% {
+    text-shadow: 0 0 15px #0ff, 0 0 25px #00f;
+  }
+}
+
+/* Accesibilidad: reducir animaciones si el usuario lo solicita */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+/* Badges de estado */
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: inline-block;
+  text-shadow: 0 0 5px #000;
+}
+
+/* Estados */
+.status-completed {
+  background: rgba(0, 255, 170, 0.2);
+  border: 1px solid #00ffaa;
+  color: #00ffaa;
+  box-shadow: 0 0 8px #00ffaa;
+}
+
+.status-pending {
+  background: rgba(255, 204, 0, 0.2);
+  border: 1px solid #ffcc00;
+  color: #ffcc00;
+  box-shadow: 0 0 8px #ffcc00;
+}
+
+.status-approved {
+  background: rgba(0, 255, 0, 0.2);
+  border: 1px solid #0f0;
+  color: #0f0;
+  box-shadow: 0 0 8px #0f0;
+}
+
+.status-rejected {
+  background: rgba(255, 0, 76, 0.2);
+  border: 1px solid #ff004c;
+  color: #ff004c;
+  box-shadow: 0 0 8px #ff004c;
+}

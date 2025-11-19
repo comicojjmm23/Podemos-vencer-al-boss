@@ -1,0 +1,190 @@
+/* Animaciones base */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 6px #0ff;
+  }
+  50% {
+    box-shadow: 0 0 12px #0ff;
+  }
+}
+
+@keyframes slideFade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Contenedor principal */
+.mission-submission-container {
+  background: radial-gradient(circle at top left, #0ff2, #001);
+  border: 2px solid #0ff;
+  border-radius: 12px;
+  padding: 20px;
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
+  box-shadow: 0 0 12px #0ff;
+  max-width: 600px;
+  margin: auto;
+  animation: slideFade 0.5s ease-out;
+}
+
+/* Título */
+.mission-title {
+  font-size: 1.6em;
+  color: #0ff;
+  text-shadow: 0 0 6px #0ff;
+  margin-bottom: 10px;
+  animation: pulseGlow 2s infinite;
+}
+
+/* Info de misión */
+.mission-info p {
+  margin: 4px 0;
+  font-size: 0.95em;
+}
+
+/* Formulario */
+.mission-form {
+  margin-top: 20px;
+}
+
+/* Etiqueta de archivo */
+.file-label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #0ff;
+}
+
+.file-label input[type="file"] {
+  display: block;
+  margin-top: 6px;
+  background: #111;
+  border: 1px solid #0ff;
+  padding: 6px;
+  color: #0ff;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+.file-label input[type="file"]:focus {
+  outline: none;
+  box-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+}
+
+/* Nombre del archivo */
+.file-name {
+  font-size: 0.9em;
+  color: #0ff;
+  margin-bottom: 10px;
+}
+
+/* Mensaje */
+.message-input {
+  width: 100%;
+  height: 80px;
+  background: #111;
+  border: 1px solid #0ff;
+  color: #0ff;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  font-family: 'Orbitron', sans-serif;
+  transition: box-shadow 0.3s ease;
+}
+
+.message-input:focus {
+  outline: none;
+  box-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+}
+
+/* Barra de progreso */
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #222;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+.progress {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, #0ff, #00f);
+  animation: pulseGlow 1.5s infinite;
+}
+
+/* Botones */
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.btn {
+  flex: 1;
+  padding: 10px 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'Orbitron', sans-serif;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.btn.cancel {
+  background: #900;
+  color: #fff;
+}
+
+.btn.submit {
+  background: #0f0;
+  color: #000;
+  box-shadow: 0 0 6px #0f0;
+}
+
+.btn:hover,
+.btn:focus {
+  transform: scale(1.05);
+  outline: none;
+  box-shadow: 0 0 12px #0ff, 0 0 24px #0ff;
+}
+
+/* HUD de tarea completada */
+.mission-complete-hud {
+  background: rgba(0, 255, 170, 0.1);
+  border: 2px solid #00ffaa;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 0 15px #00ffaa;
+  text-align: center;
+  animation: slideFade 0.5s ease-in-out;
+}
+
+.mission-complete-text {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #00ffaa;
+  text-shadow: 0 0 5px #00ffaa;
+}
+
+.mission-complete-subtext {
+  font-size: 0.9rem;
+  color: #e0e0e0;
+}
+
+/* Accesibilidad: reducir animaciones si el usuario lo solicita */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

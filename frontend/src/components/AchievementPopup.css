@@ -1,0 +1,64 @@
+/* =======================================================
+   Achievement Popup - estilo gamer/neón
+   ======================================================= */
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.6);
+  animation: fadeIn 0.5s ease forwards;
+  z-index: 9999;
+}
+
+.popup-card {
+  background: #111;
+  border: 2px solid #00f0ff;
+  border-radius: 12px;
+  padding: 25px;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 0 25px #00f0ff, 0 0 50px #ff00ff;
+  animation: popUp 0.5s ease, fadeOut 0.5s ease 3.5s forwards;
+  max-width: 320px;
+}
+
+.popup-icon {
+  width: 90px;
+  height: 90px;
+  margin-bottom: 15px;
+  filter: drop-shadow(0 0 10px #00f0ff);
+}
+
+.popup-title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #00f0ff;
+  text-shadow: 0 0 10px #00f0ff, 0 0 20px #ff00ff;
+  margin-bottom: 10px;
+}
+
+.popup-text {
+  font-size: 1.1rem;
+  color: #ddd;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes popUp {
+  from { transform: scale(0.7); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; transform: scale(0.9); }
+}

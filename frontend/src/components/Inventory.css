@@ -1,0 +1,67 @@
+.inventory-container {
+  padding: 20px;
+  text-align: center;
+  color: #fff;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.inventory-message {
+  margin: 10px 0;
+  color: #0ff;
+  text-shadow: 0 0 6px #0ff;
+}
+
+.inventory-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.inventory-card {
+  background: #111;
+  border: 2px solid #0ff;
+  border-radius: 12px;
+  padding: 15px;
+  width: 220px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.inventory-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #0ff, 0 0 40px #08f inset;
+}
+
+.inventory-type {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #f0f;
+  text-shadow: 0 0 6px #f0f;
+}
+
+.inventory-cost {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.9rem;
+  color: #ff0;
+  text-shadow: 0 0 6px #ff0;
+}
+
+.btn-delete {
+  margin-top: 10px;
+  background: #f33;
+  border: none;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.btn-delete:hover {
+  background: #c00;
+  transform: scale(1.05);
+  box-shadow: 0 0 10px #f33;
+}
