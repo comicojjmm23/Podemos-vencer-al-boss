@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./Achievements.css"; // 🎮 Estilos gamer/neón
+import { API_URL } from "../config"; // ✅ 1. Importamos la variable inteligente
+import "./Achievements.css"; 
 
 const Achievements = ({ userId, achievements: initialAchievements }) => {
   const [achievements, setAchievements] = useState(initialAchievements || []);
@@ -13,7 +14,8 @@ const Achievements = ({ userId, achievements: initialAchievements }) => {
         setLoading(true);
         setError("");
 
-        const res = await axios.get(`/api/users/${userId}/achievements`);
+        // ✅ 2. Usamos la variable API_URL antes de /api
+        const res = await axios.get(`${API_URL}/api/users/${userId}/achievements`);
         const data = res.data;
 
         const loaded = Array.isArray(data.achievements)

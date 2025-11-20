@@ -3,8 +3,9 @@
 // =======================================================
 import React, { useState, useEffect, useMemo } from "react";
 import { toast } from "react-toastify";
+import { API_URL } from "../config"; // ✅ 1. Importamos la variable inteligente
 
-// Componentes secundarios (Nota: No modificados en este archivo)
+// Componentes secundarios
 import Store from "./Store";
 import Inventory from "./Inventory";
 import Achievements from "./Achievements";
@@ -28,7 +29,9 @@ import "./Dashboard.css";
 import "./AvatarUpload.css";
 import "./MissionCard.css";
 
-const API_BASE = "http://localhost:5000/api";
+// ✅ 2. Actualizamos la base de la API usando la variable importada
+// Antes era: "http://localhost:5000/api"
+const API_BASE = `${API_URL}/api`;
 
 const Dashboard = ({ token }) => {
   const [profile, setProfile] = useState(null);
@@ -277,7 +280,7 @@ const Dashboard = ({ token }) => {
             <div className="p-6 max-w-4xl mx-auto">
             <button className="btn-back mb-6" onClick={handleBack}>← Volver</button>
             <div className="card p-8">
-                   <MissionForm token={token} onCreated={() => { toast.success("Nueva misión desplegada"); setView({ name: "dashboard" }); }} />
+                    <MissionForm token={token} onCreated={() => { toast.success("Nueva misión desplegada"); setView({ name: "dashboard" }); }} />
             </div>
             </div>
         );

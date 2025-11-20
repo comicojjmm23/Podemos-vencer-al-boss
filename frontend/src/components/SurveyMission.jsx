@@ -4,6 +4,7 @@
 // =======================================================
 
 import React, { useState } from 'react';
+import { API_URL } from '../config'; // ✅ 1. Importamos la variable inteligente
 import './SurveyMission.css';
 
 const SurveyMission = ({ mission, token, onBack, onSuccess }) => {
@@ -16,7 +17,8 @@ const SurveyMission = ({ mission, token, onBack, onSuccess }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`http://localhost:5000/api/missions/survey/submit/${mission._id}`, {
+      // ✅ 2. Usamos la variable API_URL
+      const res = await fetch(`${API_URL}/api/missions/survey/submit/${mission._id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

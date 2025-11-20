@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { API_URL } from "../../config"; // ✅ 1. Importamos subiendo 2 niveles (si está en /Admin)
+// Si te da error de importación, prueba con "../config"
 import "./AdminCreateItems.css";
 
 const AdminCreateItems = ({ token }) => {
@@ -13,12 +15,13 @@ const AdminCreateItems = ({ token }) => {
     emblemUrl: ""
   });
 
-  const API_URL = import.meta.env.VITE_API_URL;
+  // ❌ Borramos la línea vieja de import.meta.env
 
   // Cargar ítems existentes
   useEffect(() => {
     const fetchItems = async () => {
       try {
+        // ✅ 2. Usamos la variable importada
         const res = await fetch(`${API_URL}/api/store/rewards`);
         const data = await res.json();
         if (res.ok) setItems(data);
@@ -27,7 +30,7 @@ const AdminCreateItems = ({ token }) => {
       }
     };
     fetchItems();
-  }, [API_URL]);
+  }, []); // Quitamos la dependencia de API_URL
 
   // Crear ítem
   const createItem = async () => {

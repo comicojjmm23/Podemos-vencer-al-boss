@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { API_URL } from '../../config'; // ✅ 1. Importamos la variable (ajusta la ruta si es necesario)
 
 const CreateSurveyForm = ({ token, onCreated }) => {
   const [title, setTitle] = useState('');
@@ -29,7 +30,8 @@ const CreateSurveyForm = ({ token, onCreated }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch('http://localhost:5000/api/missions/survey', {
+    // ✅ 2. Usamos la variable API_URL
+    const res = await fetch(`${API_URL}/api/missions/survey`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

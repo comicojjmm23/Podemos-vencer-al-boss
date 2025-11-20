@@ -6,13 +6,15 @@
 
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { API_URL } from "./config"; // ✅ 1. Importamos la configuración
 
 import AuthScreen from "./components/AuthScreen";   // Pantalla de Login/Registro
 import Dashboard from "./components/Dashboard";     // Panel del Jugador
 import PrivateRoute from "./components/PrivateRoute"; // Protector de rutas
 import "./styles/theme.css";                        // Estilos base
 
-const API_BASE = "http://192.168.11.35:5000/api";
+// ✅ 2. Usamos la variable inteligente
+const API_BASE = `${API_URL}/api`;
 
 const App = () => {
   const [token, setToken] = useState(null);
@@ -30,6 +32,7 @@ const App = () => {
   // Función de logout
   const handleLogout = async () => {
     try {
+      // Aquí usa la API_BASE correcta automáticamente
       await fetch(`${API_BASE}/auth/logout`, {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },

@@ -1,11 +1,11 @@
 // frontend/src/components/Admin/SubmissionReview.jsx
 
 import React, { useState, useEffect } from 'react';
+import { API_URL } from '../../config'; // ✅ 1. Importamos subiendo 2 niveles
 
-// Ajusta el puerto si tu backend no corre en 5000
-const API_BASE = 'http://localhost:5000/api'; 
-// Asegúrate de que esta ruta coincida con la configuración de archivos estáticos en tu server.js
-const FILE_DOWNLOAD_URL = 'http://localhost:5000/uploads/submissions/'; 
+// ✅ 2. Usamos la variable inteligente
+const API_BASE = `${API_URL}/api`; 
+const FILE_DOWNLOAD_URL = `${API_URL}/uploads/submissions/`; 
 
 const SubmissionReview = ({ token }) => {
     const [submissions, setSubmissions] = useState([]);
@@ -128,6 +128,7 @@ const SubmissionReview = ({ token }) => {
                             <div className="mb-4">
                                 <strong>Archivo Adjunto:</strong>
                                 <a 
+                                    // ✅ 3. Usamos la variable dinámica para la descarga
                                     href={`${FILE_DOWNLOAD_URL}${submission.filePath}`} 
                                     target="_blank" 
                                     rel="noopener noreferrer"

@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import io from "socket.io-client";
+import { API_URL } from "../config"; // ✅ 1. Importamos la configuración inteligente
 import "./ChatRoom.css";
 import SalaDebugger from "./SalaDebugger";
 
-const SOCKET_URL = "http://localhost:5000";
+// ❌ Borramos const SOCKET_URL = "http://localhost:5000";
 
 const ChatRoom = ({ roomId: missionId, user }) => {
   const socketRef = useRef(null);
@@ -32,7 +33,8 @@ const ChatRoom = ({ roomId: missionId, user }) => {
   }, [messages]);
 
   useEffect(() => {
-    const socket = io(SOCKET_URL, {
+    // ✅ 2. Usamos API_URL para conectar el socket
+    const socket = io(API_URL, {
       transports: ["websocket"],
       reconnection: true,
       reconnectionAttempts: 5,
@@ -54,11 +56,12 @@ const ChatRoom = ({ roomId: missionId, user }) => {
       try {
         await new Promise((res) => setTimeout(res, 300));
 
+        // ✅ 3. Usamos API_URL también para los fetch de historial
         const [msgRes, roomRes] = await Promise.all([
-          fetch(`${SOCKET_URL}/api/chatrooms/${roomId}/messages`, {
+          fetch(`${API_URL}/api/chatrooms/${roomId}/messages`, {
             headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
           }),
-          fetch(`${SOCKET_URL}/api/chatrooms/${roomId}`, {
+          fetch(`${API_URL}/api/chatrooms/${roomId}`, {
             headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
           }),
         ]);
@@ -136,7 +139,8 @@ const ChatRoom = ({ roomId: missionId, user }) => {
 
   const clearPinnedMessage = async () => {
     try {
-      await fetch(`${SOCKET_URL}/api/chatrooms/${roomMongoId}`, {
+      // ✅ 4. Usamos API_URL aquí también
+      await fetch(`${API_URL}/api/chatrooms/${roomMongoId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -255,7 +259,7 @@ const ChatRoom = ({ roomId: missionId, user }) => {
         )}
       </form>
 
-      {/* CONSOLA DEBUGGER FLOTANTE (Ya no estorba) */}
+      {/* CONSOLA DEBUGGER FLOTANTE */}
       {socketReady && showDebug && (
         <div className="debugger-overlay">
            <div className="debugger-header-bar">

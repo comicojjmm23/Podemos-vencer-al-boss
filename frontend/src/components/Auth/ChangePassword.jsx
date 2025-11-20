@@ -2,10 +2,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { API_URL } from "../../config"; // ✅ 1. Importamos subiendo 2 niveles
 
 import "./ChangePassword.css";
 
-const API_BASE = "http://localhost:5000/api/auth";
+// ✅ 2. Usamos la variable inteligente
+const API_BASE = `${API_URL}/api/auth`;
 
 const ChangePassword = () => {
   const [formData, setFormData] = useState({

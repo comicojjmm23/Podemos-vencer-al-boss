@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { API_URL } from "../config"; // ✅ 1. Importamos la variable inteligente
 import "./AvatarUpload.css";
 
 const AvatarUploader = ({ profile, setProfile }) => {
@@ -29,8 +30,9 @@ const AvatarUploader = ({ profile, setProfile }) => {
 
     try {
       const token = localStorage.getItem("token");
+      // ✅ 2. Usamos API_URL para subir la imagen
       const res = await axios.post(
-        "http://localhost:5000/api/users/avatar/upload",
+        `${API_URL}/api/users/avatar/upload`,
         formData,
         {
           headers: {
@@ -71,9 +73,15 @@ const AvatarUploader = ({ profile, setProfile }) => {
         <img
           src={
             preview ||
-            (profile?.avatarUrl && `http://localhost:5000${profile.avatarUrl}`)
+            // ✅ 3. Usamos API_URL para mostrar la imagen del servidor
+            (profile?.avatarUrl && `${API_URL}${profile.avatarUrl}`)
           }
           alt="Avatar del jugador"
+          // Añadimos un fallback por si no hay avatar
+          onError={(e) => {
+             e.target.onerror = null; 
+             e.target.src = "https://placehold.co/150x150/1a0033/00e5ff?text=Avatar";
+          }}
         />
       </div>
 

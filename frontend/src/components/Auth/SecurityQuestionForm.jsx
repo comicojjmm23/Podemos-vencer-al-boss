@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { API_URL } from '../../config'; // ✅ 1. Importamos subiendo 2 niveles
 import './SecurityQuestionForm.css';
 
 const SecurityQuestionForm = ({ token }) => {
@@ -15,7 +16,8 @@ const SecurityQuestionForm = ({ token }) => {
     setError(null);
 
     try {
-      const res = await fetch('http://localhost:5000/api/auth/set-security-question', {
+      // ✅ 2. Usamos la variable inteligente API_URL
+      const res = await fetch(`${API_URL}/api/auth/set-security-question`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

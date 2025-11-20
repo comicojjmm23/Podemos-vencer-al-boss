@@ -1,8 +1,7 @@
 // frontend/src/components/MissionHistory.jsx
 import React, { useState, useEffect } from 'react';
-import './MissionHistory.css'; // Estilos para el historial
-
-const API_URL = 'http://localhost:5000/api/missions/history';
+import { API_URL } from '../config'; // ✅ 1. Importamos la variable inteligente
+import './MissionHistory.css';
 
 const MissionHistory = ({ token }) => {
   const [history, setHistory] = useState([]);
@@ -12,7 +11,8 @@ const MissionHistory = ({ token }) => {
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const res = await fetch(API_URL, {
+        // ✅ 2. Usamos la variable dinámica
+        const res = await fetch(`${API_URL}/api/missions/history`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -66,7 +66,7 @@ const MissionHistory = ({ token }) => {
               <th>XP Obtenida</th>
               <th>Monedas Ganadas</th>
               <th>Fecha de Finalización</th>
-              <th>Estado</th> {/* Nueva columna */}
+              <th>Estado</th>
             </tr>
           </thead>
           <tbody>

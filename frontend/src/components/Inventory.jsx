@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
+import { API_URL } from "../config"; // ✅ 1. Importamos la variable inteligente
 import "./Inventory.css";
 
 const Inventory = ({ token }) => {
   const [items, setItems] = useState([]);
   const [message, setMessage] = useState("");
 
-  const API_URL = import.meta.env.VITE_API_URL;
+  // ❌ Borramos la línea vieja de import.meta.env
 
   // Cargar inventario al montar
   useEffect(() => {
     const fetchInventory = async () => {
       try {
+        // ✅ 2. Usamos la variable importada + /api
         const res = await fetch(`${API_URL}/api/users/inventory`, {
           headers: {
             "Authorization": `Bearer ${token}`
@@ -28,7 +30,7 @@ const Inventory = ({ token }) => {
       }
     };
     fetchInventory();
-  }, [API_URL, token]);
+  }, [token]); // Quitamos API_URL de las dependencias porque ahora es una constante importada
 
   // Eliminar ítem del inventario
   const deleteItem = async (id) => {
@@ -36,6 +38,7 @@ const Inventory = ({ token }) => {
       return;
     }
     try {
+      // ✅ 3. Corregimos aquí también
       const res = await fetch(`${API_URL}/api/users/inventory/${id}`, {
         method: "DELETE",
         headers: {

@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { API_URL } from '../config'; // ✅ 1. Importamos la variable inteligente
 import './MissionSubmission.css';
 
-const API_BASE = 'http://localhost:5000/api';
+// ✅ 2. Usamos la variable para construir la URL base
+const API_BASE = `${API_URL}/api`;
+
 const MAX_SIZE_MB = 10;
 
 const allowedTypes = [
@@ -19,7 +22,7 @@ const MissionSubmission = ({ token, mission, onSubmissionSuccess, onBack }) => {
   const [file, setFile] = useState(null);
   const [message, setMessage] = useState('');
   const [uploading, setUploading] = useState(false);
-  const [submitted, setSubmitted] = useState(false); // ✅ Nuevo estado
+  const [submitted, setSubmitted] = useState(false);
 
   const validateFile = (file) => {
     if (!file) return '⚠️ Debes seleccionar un archivo.';
@@ -36,7 +39,7 @@ const MissionSubmission = ({ token, mission, onSubmissionSuccess, onBack }) => {
       setFile(null);
     } else {
       setFile(selected);
-      setSubmitted(false); // ✅ Oculta el HUD si se vuelve a subir
+      setSubmitted(false);
       console.log("Archivo seleccionado:", selected.name, selected.type, selected.size);
     }
   };
@@ -54,12 +57,13 @@ const MissionSubmission = ({ token, mission, onSubmissionSuccess, onBack }) => {
       formData.append('submissionFile', file);
       formData.append('message', message);
 
+      // Aquí axios usará la nueva API_BASE correcta
       const response = await axios.post(`${API_BASE}/missions/submit/${mission._id}`, formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
       toast.success('✅ Tarea entregada con éxito');
-      setSubmitted(true); // ✅ Muestra el HUD
+      setSubmitted(true);
       if (onSubmissionSuccess) onSubmissionSuccess();
       setFile(null);
       setMessage('');
@@ -82,7 +86,6 @@ const MissionSubmission = ({ token, mission, onSubmissionSuccess, onBack }) => {
         <p>Recompensa: +{mission.xpReward} XP | {mission.coinsReward} 🪙</p>
       </div>
 
-      {/* ✅ HUD de tarea completada */}
       {submitted && (
         <div className="mission-complete-hud" role="status" aria-live="polite">
           <p className="mission-complete-text">✅ ¡Tarea completada!</p>
@@ -126,4 +129,3 @@ const MissionSubmission = ({ token, mission, onSubmissionSuccess, onBack }) => {
 };
 
 export default MissionSubmission;
-

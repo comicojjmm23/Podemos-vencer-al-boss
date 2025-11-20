@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { API_URL } from "../config"; // ✅ 1. Importamos la variable inteligente
 import "./SalaDebugger.css";
 
 const SalaDebugger = ({ socket, roomMongoId, fetchStatus, error }) => {
@@ -45,7 +46,8 @@ const SalaDebugger = ({ socket, roomMongoId, fetchStatus, error }) => {
 
     const fetchRoomInfo = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/chatrooms/debug/${roomMongoId}`);
+        // ✅ 2. Usamos API_URL para que el debugger funcione en producción
+        const res = await fetch(`${API_URL}/api/chatrooms/debug/${roomMongoId}`);
         const data = await res.json();
         setRoomInfo(data);
       } catch (err) {

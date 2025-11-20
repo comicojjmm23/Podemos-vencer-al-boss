@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { API_URL } from "../../config"; // ✅ 1. Importamos subiendo 2 niveles
 import "./AdminPanel.css";
 import EditMissionModal from "./EditMissionModal";
 
-const API_BASE = "http://localhost:5000/api";
+// ✅ 2. Usamos la variable inteligente
+const API_BASE = `${API_URL}/api`;
 
 const MissionList = ({ token }) => {
   const [missions, setMissions] = useState([]);
@@ -18,11 +20,12 @@ const MissionList = ({ token }) => {
     setError("");
     try {
       const config = { headers: { Authorization: `Bearer ${token}` } };
+      // Axios usará la URL correcta automáticamente
       const res = await axios.get(`${API_BASE}/missions/admin`, config);
       setMissions(res.data);
     } catch (err) {
       console.error("Error fetching missions:", err);
-      setError("Error al cargar la lista de misiones. (¿Backend iniciado?)");
+      setError("Error al cargar la lista de misiones.");
     } finally {
       setLoading(false);
     }
@@ -124,4 +127,3 @@ const MissionList = ({ token }) => {
 };
 
 export default MissionList;
-

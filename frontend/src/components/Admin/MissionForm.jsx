@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { API_URL } from '../../config'; // ✅ 1. Importamos subiendo 2 niveles
 import './MissionForm.css';
 import MissionToast from './MissionToast';
-import FileMissionSubmitHUD from './FileMissionSubmitHUD'; // HUD de entrega
+import FileMissionSubmitHUD from './FileMissionSubmitHUD';
 
 const MissionForm = ({ token }) => {
   const [formData, setFormData] = useState({
@@ -9,7 +10,7 @@ const MissionForm = ({ token }) => {
     description: '',
     difficulty: 'easy',
     type: '',
-    questions: [{ text: '', correctAnswer: 'sí' }], // 👈 cada pregunta con respuesta correcta
+    questions: [{ text: '', correctAnswer: 'sí' }],
   });
 
   const [status, setStatus] = useState('idle');
@@ -77,11 +78,12 @@ const MissionForm = ({ token }) => {
           .map(q => ({
             question: q.text,
             options: ['sí', 'no'],
-            correctAnswer: q.correctAnswer, // 👈 ahora se guarda
+            correctAnswer: q.correctAnswer,
           }));
       }
 
-      const res = await fetch('http://localhost:5000/api/missions', {
+      // ✅ 2. Usamos la variable API_URL
+      const res = await fetch(`${API_URL}/api/missions`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

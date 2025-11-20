@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { API_URL } from "../config"; // ✅ 1. Importamos la variable inteligente
 import "./Store.css";
 
 const Store = ({ token, userRole, onCoinsUpdate, onInventoryUpdate }) => {
@@ -12,13 +13,13 @@ const Store = ({ token, userRole, onCoinsUpdate, onInventoryUpdate }) => {
     type: "cosmetic"
   });
 
-  // URL base desde .env (Vite usa import.meta.env)
-  const API_URL = import.meta.env.VITE_API_URL;
+  // ❌ Borramos la línea vieja de import.meta.env
 
   // Cargar ítems al montar
   useEffect(() => {
     const loadRewards = async () => {
       try {
+        // ✅ 2. Usamos la variable importada
         const res = await fetch(`${API_URL}/api/store/rewards`);
         const data = await res.json();
         if (res.ok) {
@@ -32,7 +33,7 @@ const Store = ({ token, userRole, onCoinsUpdate, onInventoryUpdate }) => {
       }
     };
     loadRewards();
-  }, [API_URL]);
+  }, []); // Quitamos API_URL de las dependencias, ya no es necesaria
 
   // Comprar ítem
   const buyReward = async (id) => {

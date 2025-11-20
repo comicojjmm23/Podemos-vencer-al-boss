@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { API_URL } from "../config"; // ✅ 1. Importamos la variable
 import "./AchievementPopup.css";
 
 const AchievementPopup = ({ achievement, onClose }) => {
@@ -6,6 +7,7 @@ const AchievementPopup = ({ achievement, onClose }) => {
     if (!achievement) return;
 
     // Mapeo de sonidos por código de logro
+    // (Asegúrate de que estos archivos existan en tu carpeta public/sounds)
     const soundMap = {
       welcome_warrior: "/sounds/fanfare.mp3",
       missionsCompleted_5: "/sounds/powerup.mp3",
@@ -32,13 +34,24 @@ const AchievementPopup = ({ achievement, onClose }) => {
 
   if (!achievement) return null;
 
+  // ✅ 2. Lógica inteligente para la imagen
+  // Si la URL empieza con "http", es externa (ej: imgur). Si no, es del backend y le ponemos API_URL.
+  const imageSrc = achievement.iconUrl && achievement.iconUrl.startsWith("http")
+    ? achievement.iconUrl
+    : `${API_URL}${achievement.iconUrl}`;
+
   return (
     <div className="popup-overlay" role="alert" aria-live="assertive">
-      <div className="popup-card">
+      <div className="popup-card animate-pop-in">
         <img
-          src={achievement.iconUrl}
+          src={imageSrc}
           alt={achievement.title}
           className="popup-icon"
+          // Fallback por si la imagen falla
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = "https://placehold.co/100x100/ffaa00/000?text=🏆"; 
+          }}
         />
         <h3 className="popup-title">🏆 ¡Logro desbloqueado!</h3>
         <p className="popup-text">{achievement.title}</p>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { API_URL } from "../../config"; // ✅ 1. Importamos la variable (ajusta los ../ si es necesario)
 import MissionToast from "./MissionToast";
 import "./FileMissionSubmitHUD.css";
 
@@ -53,7 +54,8 @@ const FileMissionSubmitHUD = ({ missionId, token }) => {
       formData.append("submissionFile", selectedFile);
       formData.append("message", message);
 
-      await axios.post(`/api/missions/submit/${missionId}`, formData, {
+      // ✅ 2. Usamos la ruta absoluta con API_URL
+      await axios.post(`${API_URL}/api/missions/submit/${missionId}`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

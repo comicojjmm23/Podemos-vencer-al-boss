@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { API_URL } from '../../config'; // ✅ 1. Importamos subiendo 2 niveles
 
 const ForgotPassword = () => {
   const [step, setStep] = useState(1);
@@ -25,10 +26,12 @@ const ForgotPassword = () => {
     setMsg('');
 
     const payload = method === 'cedula' ? { cedula } : { email };
+    
+    // ✅ 2. Usamos API_URL para las rutas de solicitud
     const endpoint =
       method === 'cedula'
-        ? 'http://localhost:5000/api/auth/forgot-password'
-        : 'http://localhost:5000/api/auth/forgot-password-by-email';
+        ? `${API_URL}/api/auth/forgot-password`
+        : `${API_URL}/api/auth/forgot-password-by-email`;
 
     try {
       const res = await fetch(endpoint, {
@@ -58,10 +61,11 @@ const ForgotPassword = () => {
         ? { cedula, securityAnswer: answer, newPassword }
         : { email, securityAnswer: answer, newPassword };
 
+    // ✅ 3. Usamos API_URL para las rutas de reseteo
     const endpoint =
       method === 'cedula'
-        ? 'http://localhost:5000/api/auth/reset-password-with-security'
-        : 'http://localhost:5000/api/auth/reset-password-by-email';
+        ? `${API_URL}/api/auth/reset-password-with-security`
+        : `${API_URL}/api/auth/reset-password-by-email`;
 
     try {
       const res = await fetch(endpoint, {

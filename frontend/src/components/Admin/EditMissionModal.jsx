@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import axios from "axios";
 import "./EditMissionModal.css";
 import { toast } from "react-toastify";
+import { API_URL } from "../../config"; // ✅ 1. Importamos subiendo 2 niveles
 
-const API_BASE = "http://localhost:5000/api";
+// ✅ 2. Usamos la variable inteligente
+const API_BASE = `${API_URL}/api`;
 
 const EditMissionModal = ({ mission, token, onClose, onSave }) => {
   const [formData, setFormData] = useState({

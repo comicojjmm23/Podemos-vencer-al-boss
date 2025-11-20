@@ -1,9 +1,11 @@
 // frontend/src/components/Auth/Profile2FA.jsx
 import React, { useState } from "react";
 import axios from "axios";
+import { API_URL as GLOBAL_API_URL } from "../../config"; // ✅ 1. Importamos subiendo 2 niveles
 import "./Profile2FA.css";
 
-const API_URL = "http://localhost:5000/api/auth";
+// ✅ 2. Definimos la URL de Auth usando la global
+const API_URL = `${GLOBAL_API_URL}/api/auth`;
 
 const Profile2FA = ({ token, isTwoFAEnabledInitial = false, xp = 200, coins = 300 }) => {
   const [qr, setQr] = useState(null);
