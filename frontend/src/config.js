@@ -5,6 +5,7 @@
 
 // AHORA BUSCAMOS LA VARIABLE CON EL PREFIJO ESTÁNDAR DE VERCEL/NEXT.JS
 // (usamos este prefijo para forzar la inyección en la fase de build)
+// Esta variable se cargará desde .env.production.local en producción.
 const VERCEL_API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 // Definimos la URL de la API.
@@ -14,5 +15,6 @@ export const API_URL = VERCEL_API_URL
   ? VERCEL_API_URL 
   : "http://localhost:5000"; 
 
-// Opcional: Para debuggear en el navegador si la variable se cargó
+// Opcional: Para debuggear en el navegador si la variable se cargó.
+// Si la compilación fue exitosa, este log mostrará la URL de Railway.
 console.log("API URL Cargada:", API_URL);
