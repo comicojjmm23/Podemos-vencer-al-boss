@@ -5,7 +5,8 @@
 // =======================================================
 
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+// CAMBIO IMPORTANTE: Usamos HashRouter para evitar errores 404 en Vercel
+import { HashRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { API_URL } from "./config"; // ✅ 1. Importamos la configuración
 
 import AuthScreen from "./components/AuthScreen";   // Pantalla de Login/Registro
