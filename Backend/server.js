@@ -19,43 +19,52 @@ const server = http.createServer(app);
 const PORT = process.env.PORT || 5000;
 const DB_URI = process.env.MONGO_URI;
 
-// 👇 NUEVA LÓGICA CORS (SOPORTE DE COMODINES PARA VERIFICACIÓN DE SUBDOMINIOS) 👇
+// 👇 LÓGICA CORS DEFINITIVA: SOPORTE DINÁMICO DE ORÍGENES CON CREDENTIALS: TRUE 👇
 
-// Define la lista de orígenes permitidos, separando por comas.
-const CORS_ORIGIN_LIST = process.env.CORS_ORIGIN 
+// Lista de orígenes permitidos (incluyendo el comodín de Vercel)
+const ALLOWED_ORIGINS = process.env.CORS_ORIGIN 
   ? process.env.CORS_ORIGIN.split(',').map(s => s.trim())
   : ['http://localhost:3000', 'http://localhost:5000']; 
 
-// Función para validar el origen entrante, soportando comodines (*) para subdominios.
-const corsOriginValidator = (origin, callback) => {
-    // 1. Permite peticiones sin origen (ej: Postman, curl, aplicaciones nativas)
-    if (!origin) return callback(null, true);
+// Función para generar la configuración de CORS en tiempo de ejecución
+const corsOptions = {
+    // La función 'origin' verifica si el origen entrante está permitido 
+    // y lo refleja en la cabecera 'Access-Control-Allow-Origin'.
+    origin: (origin, callback) => {
+        // 1. Permitir peticiones sin origen (ej: Postman, apps nativas).
+        if (!origin) return callback(null, true);
 
-    // 2. Busca una coincidencia
-    let originIsAllowed = false;
+        // 2. Comprobar si hay una coincidencia con la lista estricta
+        let originIsAllowed = false;
 
-    for (const allowed of CORS_ORIGIN_LIST) {
-        if (allowed === origin) {
-            originIsAllowed = true;
-            break;
-        }
-
-        // Si el origen permitido incluye un comodín (ej: *.vercel.app)
-        if (allowed.includes('*')) {
-            const regex = new RegExp('^' + allowed.replace(/\./g, '\\.').replace(/\*/g, '.*') + '$');
-            if (regex.test(origin)) {
+        for (const allowed of ALLOWED_ORIGINS) {
+            // Coincidencia exacta
+            if (allowed === origin) {
                 originIsAllowed = true;
                 break;
             }
-        }
-    }
 
-    if (originIsAllowed) {
-        return callback(null, true);
-    } else {
-        const msg = `El origen ${origin} no está permitido por la política CORS.`;
-        callback(new Error(msg), false);
-    }
+            // Coincidencia con comodín (ej: *.vercel.app)
+            if (allowed.includes('*')) {
+                // Crear una expresión regular para validar el subdominio
+                const regex = new RegExp('^' + allowed.replace(/\./g, '\\.').replace(/\*/g, '.*') + '$');
+                if (regex.test(origin)) {
+                    originIsAllowed = true;
+                    break;
+                }
+            }
+        }
+        
+        // 3. Devolver el resultado de la validación
+        if (originIsAllowed) {
+            callback(null, true);
+        } else {
+            callback(new Error(`Not allowed by CORS: ${origin}`), false);
+        }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: false // ⬅️ CAMBIO: Si solo usas JWT, pon esto a false para relajar la restricción CORS.
 };
 
 // =======================================================
@@ -66,12 +75,7 @@ app.use(helmet({ crossOriginResourcePolicy: { policy: "cross-origin" } }));
 app.use(morgan(process.env.NODE_ENV === "production" ? "combined" : "dev"));
 
 // 🌐 Configuración CORS para Express
-app.use(cors({
-  origin: corsOriginValidator, // Usamos la función con soporte de comodines
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true 
-}));
+app.use(cors(corsOptions)); // ⬅️ Usamos el objeto de configuración dinámico
 app.use(express.json({ limit: "2mb" }));
 app.use(express.urlencoded({ extended: true }));
 
@@ -128,9 +132,9 @@ app.use((err, req, res, next) => {
 // =======================================================
 const io = new Server(server, {
   cors: {
-    origin: corsOriginValidator, // ⬅️ Aplicamos la misma función de validación aquí
+    origin: corsOptions.origin, // ⬅️ Aplicamos la misma función de validación aquí
     methods: ["GET", "POST"],
-    credentials: true 
+    credentials: false // ⬅️ CAMBIO: Si solo usas JWT, pon esto a false
   },
   transports: ["websocket", "polling"]
 });
@@ -150,6 +154,6 @@ connectDB().then(() => {
     console.log(`📡 Servidor en puerto ${PORT}`);
     console.log(`🗂️ Static files: http://localhost:${PORT}/uploads`);
     console.log(`🧠 Socket.IO activo en /socket.io`);
-    console.log(`🌐 Orígenes CORS permitidos (Raw): ${process.env.CORS_ORIGIN || ALLOWED_ORIGINS.join(', ')}`); // ⬅️ Nuevo log útil
+    console.log(`🌐 Orígenes CORS permitidos (Raw): ${process.env.CORS_ORIGIN || ALLOWED_ORIGINS.join(', ')}`); 
   });
 });
