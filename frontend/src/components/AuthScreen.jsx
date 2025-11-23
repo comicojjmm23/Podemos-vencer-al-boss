@@ -1,16 +1,14 @@
 // =======================================================
 // AuthScreen.jsx
-// Pantalla de autenticación "Gamer" v4 (SINTAXIS Y A11Y FINAL)
+// Pantalla de autenticación "Gamer" v4 (SINTAXIS CORREGIDA)
 // =======================================================
 
 import React, { useState } from "react";
-// Importas tu CSS (el limpio de arriba)
+import { API_URL } from "../config"; // ✅ Importamos la variable inteligente
 import "./AuthScreen.css"; 
-// Importación correcta del logo
-// Nota: Reemplaza esto con la ruta correcta a tu imagen
 import logoIUJO from "../assets/iujologo-gamer.png";
 
-const API_URL = "http://localhost:5000/api/auth";
+// ❌ AQUÍ BORRAMOS LA LÍNEA MALA QUE TENÍAS
 
 const AuthScreen = ({ setToken }) => {
   const [isRegister, setIsRegister] = useState(false);
@@ -36,7 +34,7 @@ const AuthScreen = ({ setToken }) => {
   const [resetStep, setResetStep] = useState(1);
   const [securityQuestion, setSecurityQuestion] = useState("");
   const [securityAnswer, setSecurityAnswer] = useState("");
-  const [method, setMethod] = useState("email"); // 'cedula' o 'email'
+  const [method, setMethod] = useState("email");
 
   const { nombre, apellido, cedula, username, email, password } = formData;
 
@@ -65,7 +63,8 @@ const AuthScreen = ({ setToken }) => {
       : { email, password };
 
     try {
-      const res = await fetch(`${API_URL}/${endpoint}`, {
+      // ✅ CORRECCIÓN: Agregamos /api/auth/ antes del endpoint
+      const res = await fetch(`${API_URL}/api/auth/${endpoint}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
@@ -90,18 +89,12 @@ const AuthScreen = ({ setToken }) => {
         return;
       }
 
-      // Guardar token y usuario (uso de localStorage para demo)
       setToken(data.token);
       localStorage.setItem("token", data.token);
       if (data.user) localStorage.setItem("user", JSON.stringify(data.user));
 
-      // Mostrar HUD de bienvenida
       if (isRegister) {
         setSuccess("HUD_WELCOME");
-      }
-
-      // Redirigir al dashboard
-      if (isRegister) {
         setTimeout(() => {
             window.location.href = "/dashboard";
         }, 3000); 
@@ -124,7 +117,8 @@ const AuthScreen = ({ setToken }) => {
     clearMessages();
 
     try {
-      const res = await fetch(`${API_URL}/verify-2fa`, {
+      // ✅ CORRECCIÓN: Ruta completa /api/auth/verify-2fa
+      const res = await fetch(`${API_URL}/api/auth/verify-2fa`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, code }),
@@ -163,10 +157,12 @@ const AuthScreen = ({ setToken }) => {
     clearMessages();
 
     const payload = method === "cedula" ? { cedula } : { email };
+    
+    // ✅ CORRECCIÓN: Rutas completas con /api/auth/
     const endpoint =
       method === "cedula"
-        ? `${API_URL}/forgot-password`
-        : `${API_URL}/forgot-password-by-email`;
+        ? `${API_URL}/api/auth/forgot-password`
+        : `${API_URL}/api/auth/forgot-password-by-email`;
 
     try {
       const res = await fetch(endpoint, {
@@ -201,10 +197,11 @@ const AuthScreen = ({ setToken }) => {
         ? { cedula, securityAnswer, newPassword: password }
         : { email, securityAnswer, newPassword: password };
 
+    // ✅ CORRECCIÓN: Rutas completas con /api/auth/
     const endpoint =
       method === "cedula"
-        ? `${API_URL}/reset-password-with-security`
-        : `${API_URL}/reset-password-by-email`;
+        ? `${API_URL}/api/auth/reset-password-with-security`
+        : `${API_URL}/api/auth/reset-password-by-email`;
 
     try {
       const res = await fetch(endpoint, {
@@ -233,15 +230,13 @@ const AuthScreen = ({ setToken }) => {
     }
   };
 
-
-  // -------------------------
-  // RENDER
-  // -------------------------
+  // ... El resto del render (return) se queda igual ...
+  // (Copia aquí todo el bloque return (...) que ya tenías, está bien)
+  
   return (
     <main className="auth-container" role="main" aria-label="Pantalla de autenticación principal">
-      
-      {/* Contenedor principal del formulario (Card) */}
-      <div className="auth-card" role="region" aria-label="Formulario de acceso">
+      {/* ... Todo tu código HTML/JSX sigue aquí igual ... */}
+       <div className="auth-card" role="region" aria-label="Formulario de acceso">
         
         {/* LOGO FLOTANTE */}
         <div className="logo-container">
@@ -484,7 +479,7 @@ const AuthScreen = ({ setToken }) => {
               >
                 {/* A11Y: El label del select debe tener una clase para estilo si lo necesita */}
                 <label className="auth-label-static" htmlFor="reset-method-input" style={{marginBottom: '0.5rem', display: 'block', color: '#B0E0FF', textAlign: 'left', paddingLeft: '45px', fontWeight: 'bold'}}>
-                   Método de recuperación
+                    Método de recuperación
                 </label>
                 <select
                   id="reset-method-input" // A11Y: ID único y asociado
