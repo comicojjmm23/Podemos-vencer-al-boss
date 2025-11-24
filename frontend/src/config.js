@@ -1,20 +1,16 @@
 // =======================================================
 // config.js
-// Archivo de configuración para la URL de la API
+// Archivo de configuración para la URL de la API en Vite
 // =======================================================
 
-// AHORA BUSCAMOS LA VARIABLE CON EL PREFIJO ESTÁNDAR DE VERCEL/NEXT.JS
-// (usamos este prefijo para forzar la inyección en la fase de build)
-// Esta variable se cargará desde .env.production.local en producción.
-const VERCEL_API_URL = process.env.NEXT_PUBLIC_API_URL;
+// Accedemos a la variable de entorno con el prefijo VITE_
+// Esta variable se define en .env para desarrollo y .env.production para producción
+const VITE_API_URL = import.meta.env.VITE_API_URL;
 
 // Definimos la URL de la API.
-// Priorizamos la variable de entorno de Vercel si existe.
-// Si no existe, usamos localhost (para desarrollo local)
-export const API_URL = VERCEL_API_URL 
-  ? VERCEL_API_URL 
-  : "http://localhost:5000"; 
+// Si la variable existe, usamos esa (Railway en producción o localhost en desarrollo).
+// Si no existe, usamos un fallback explícito.
+export const API_URL = VITE_API_URL || "http://localhost:5000";
 
-// Opcional: Para debuggear en el navegador si la variable se cargó.
-// Si la compilación fue exitosa, este log mostrará la URL de Railway.
-console.log("API URL Cargada:", API_URL);
+// Debug: Mostrar la URL cargada en consola para verificar que se inyectó correctamente
+console.log("✅ API URL Cargada:", API_URL);
